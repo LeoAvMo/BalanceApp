@@ -6,14 +6,65 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		79B1F6E92EE0424D0073C3C1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B1F6E82EE0424D0073C3C1 /* WidgetKit.framework */; };
+		79B1F6EB2EE0424D0073C3C1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B1F6EA2EE0424D0073C3C1 /* SwiftUI.framework */; };
+		79B1F6FA2EE0424E0073C3C1 /* PriorityTaskExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 79B1F6E62EE0424D0073C3C1 /* PriorityTaskExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		79B1F6F82EE0424E0073C3C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 79B1F6C82EE03FC10073C3C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79B1F6E52EE0424D0073C3C1;
+			remoteInfo = PriorityTaskExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		79B1F6FF2EE0424E0073C3C1 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				79B1F6FA2EE0424E0073C3C1 /* PriorityTaskExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		79B1F6D02EE03FC10073C3C1 /* BalanceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BalanceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79B1F6E62EE0424D0073C3C1 /* PriorityTaskExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PriorityTaskExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		79B1F6E82EE0424D0073C3C1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		79B1F6EA2EE0424D0073C3C1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		79B1F6FB2EE0424E0073C3C1 /* Exceptions for "PriorityTask" folder in "PriorityTaskExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 79B1F6E52EE0424D0073C3C1 /* PriorityTaskExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		79B1F6D22EE03FC10073C3C1 /* BalanceApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = BalanceApp;
+			sourceTree = "<group>";
+		};
+		79B1F6EC2EE0424D0073C3C1 /* PriorityTask */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				79B1F6FB2EE0424E0073C3C1 /* Exceptions for "PriorityTask" folder in "PriorityTaskExtension" target */,
+			);
+			path = PriorityTask;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,6 +77,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		79B1F6E32EE0424D0073C3C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79B1F6EB2EE0424D0073C3C1 /* SwiftUI.framework in Frameworks */,
+				79B1F6E92EE0424D0073C3C1 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -33,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				79B1F6D22EE03FC10073C3C1 /* BalanceApp */,
+				79B1F6EC2EE0424D0073C3C1 /* PriorityTask */,
+				79B1F6E72EE0424D0073C3C1 /* Frameworks */,
 				79B1F6D12EE03FC10073C3C1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +103,18 @@
 			isa = PBXGroup;
 			children = (
 				79B1F6D02EE03FC10073C3C1 /* BalanceApp.app */,
+				79B1F6E62EE0424D0073C3C1 /* PriorityTaskExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		79B1F6E72EE0424D0073C3C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				79B1F6E82EE0424D0073C3C1 /* WidgetKit.framework */,
+				79B1F6EA2EE0424D0073C3C1 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,10 +127,12 @@
 				79B1F6CC2EE03FC10073C3C1 /* Sources */,
 				79B1F6CD2EE03FC10073C3C1 /* Frameworks */,
 				79B1F6CE2EE03FC10073C3C1 /* Resources */,
+				79B1F6FF2EE0424E0073C3C1 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				79B1F6F92EE0424E0073C3C1 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				79B1F6D22EE03FC10073C3C1 /* BalanceApp */,
@@ -69,6 +143,28 @@
 			productName = BalanceApp;
 			productReference = 79B1F6D02EE03FC10073C3C1 /* BalanceApp.app */;
 			productType = "com.apple.product-type.application";
+		};
+		79B1F6E52EE0424D0073C3C1 /* PriorityTaskExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79B1F6FC2EE0424E0073C3C1 /* Build configuration list for PBXNativeTarget "PriorityTaskExtension" */;
+			buildPhases = (
+				79B1F6E22EE0424D0073C3C1 /* Sources */,
+				79B1F6E32EE0424D0073C3C1 /* Frameworks */,
+				79B1F6E42EE0424D0073C3C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				79B1F6EC2EE0424D0073C3C1 /* PriorityTask */,
+			);
+			name = PriorityTaskExtension;
+			packageProductDependencies = (
+			);
+			productName = PriorityTaskExtension;
+			productReference = 79B1F6E62EE0424D0073C3C1 /* PriorityTaskExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +177,9 @@
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					79B1F6CF2EE03FC10073C3C1 = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
+					79B1F6E52EE0424D0073C3C1 = {
 						CreatedOnToolsVersion = 26.1.1;
 					};
 				};
@@ -100,12 +199,20 @@
 			projectRoot = "";
 			targets = (
 				79B1F6CF2EE03FC10073C3C1 /* BalanceApp */,
+				79B1F6E52EE0424D0073C3C1 /* PriorityTaskExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		79B1F6CE2EE03FC10073C3C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79B1F6E42EE0424D0073C3C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +229,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		79B1F6E22EE0424D0073C3C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		79B1F6F92EE0424E0073C3C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 79B1F6E52EE0424D0073C3C1 /* PriorityTaskExtension */;
+			targetProxy = 79B1F6F82EE0424E0073C3C1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		79B1F6DB2EE03FC30073C3C1 /* Debug */ = {
@@ -249,18 +371,20 @@
 		79B1F6DE2EE03FC30073C3C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = LockIn;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X6QP58933C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Lock In";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -281,18 +405,20 @@
 		79B1F6DF2EE03FC30073C3C1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = LockIn;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X6QP58933C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Lock In";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,6 +429,66 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		79B1F6FD2EE0424E0073C3C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X6QP58933C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PriorityTask/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PriorityTask;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = LeoAvMo.BalanceApp.PriorityTask;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		79B1F6FE2EE0424E0073C3C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X6QP58933C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PriorityTask/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PriorityTask;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = LeoAvMo.BalanceApp.PriorityTask;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
@@ -327,6 +513,15 @@
 			buildConfigurations = (
 				79B1F6DE2EE03FC30073C3C1 /* Debug */,
 				79B1F6DF2EE03FC30073C3C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79B1F6FC2EE0424E0073C3C1 /* Build configuration list for PBXNativeTarget "PriorityTaskExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79B1F6FD2EE0424E0073C3C1 /* Debug */,
+				79B1F6FE2EE0424E0073C3C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

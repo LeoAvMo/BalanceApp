@@ -12,6 +12,7 @@ import SwiftUI
 struct PriorityTaskBundle: WidgetBundle {
     var body: some Widget {
         PriorityTask()
+        ImportantTaskWidget()
         PriorityTaskLiveActivity()
     }
 }
