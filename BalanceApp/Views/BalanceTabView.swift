@@ -21,7 +21,6 @@ struct BalanceTabView: View {
             Tab("Timer", systemImage: "alarm.fill") {
                 AlarmView()
             }
-            
         }
     }
 }

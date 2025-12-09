@@ -6,15 +6,28 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ToDoTaksView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var tasks: [ToDoTask]
+    
     @State private var filteredPriority: Priority? = nil
+    @State private var topTask: ToDoTask? = nil
+    @State private var showSheet: Bool = false
+    
     var body: some View {
         NavigationStack {
-            Group {
-                Text("To Do Tasks")
+            ScrollView {
+                if tasks.isEmpty {
+                    ContentUnavailableView("No Tasks", systemImage: "checkmark.seal.fill", description: Text("It looks like you have no tasks left to do. Add some tasks to get started!"))
+                }
             }
             .navigationTitle("Tasks")
+            .sheet(isPresented: $showSheet) {
+                AddToDoTaskView()
+                    .presentationDetents([.medium])
+            }
             .toolbar {
                 Menu ("Filter tasks", systemImage: "line.3.horizontal.decrease") {
                     ForEach(Priority.allCases) { priority in
@@ -32,11 +45,9 @@ struct ToDoTaksView: View {
                     }
                 }
                 Button("Add Task", systemImage: "plus") {
-                    
+                    showSheet.toggle()
                 }
             }
-            // TODO: Add background view
-            .background()
         }
     }
 }
