@@ -23,10 +23,10 @@ struct ToDoTaksView: View {
                     ContentUnavailableView("No Tasks", systemImage: "checkmark.seal.fill", description: Text("It looks like you have no tasks left to do. Add some tasks to get started!"))
                 } else {
                     MostImportantTaskView(topTask: topTask)
-                        .padding()
+                    .padding()
                 }
             }
-            .task {
+            .task{
                 topTask = placeholderTask
             }
             .navigationTitle("Tasks")
@@ -62,21 +62,62 @@ struct ToDoTaksView: View {
     ToDoTaksView()
 }
 
-struct MostImportantTaskView: View{
+struct MostImportantTaskView: View {
     var topTask: ToDoTask?
+
         var body: some View {
             ZStack {
                 RoundedRectangle(cornerRadius: 40)
-                    .fill(topTask?.priority.priorityColor() ?? Color.gray)
-                
-                VStack {
-                    Text(topTask?.name ?? "None")
-                        .font(.largeTitle)
-                        .bold()
-                        .multilineTextAlignment(.center)
+                    .fill(.accent.opacity(0.1))
+                VStack (spacing: 10){
+                    HStack {
+                        Image("Lumi")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(-15)
+                            .offset(y: 1)
+                            .frame(width: 30, height: 30)
+                        Text("Your next task is:")
+                            .font(.subheadline)
+                        Spacer()
+                        Button {
+                            
+                        } label: {
+                            HStack {
+                                Image(systemName: "clock.fill")
+                                Text("\(Duration.seconds(topTask?.timeToComplete ?? 0).formatted())")
+                            }
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                        }
+                    }
+                    
+                    .buttonStyle(.borderedProminent)
+                    HStack{
+                        Text(topTask?.name ?? "None")
+                            .font(.largeTitle)
+                            .bold()
+                            .multilineTextAlignment(.center)
+                    }
+                    
+                    HStack {
+                        Text("Due to: \(topTask?.dueDate.formatted(date: .numeric, time: .omitted) ?? "Unknown")")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        HStack {
+                            Image(systemName: topTask?.priority.indicatorImage() ?? "gauge.with.dots.needle.0percent")
+                            Text("\(topTask?.priority.rawValue ?? "Unknown") Priority")
+                        }
+                        .foregroundStyle(topTask?.priority.priorityColor() ?? .gray)
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                    }
+                    .padding(.horizontal, 8)
                 }
                 .padding()
             }
+            
             .frame(maxWidth: .infinity)
         
                 
