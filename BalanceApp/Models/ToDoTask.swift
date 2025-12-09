@@ -37,4 +37,13 @@ enum Priority: String, Codable, CaseIterable, Identifiable {
             case .high: return 3
         }
     }
+    
+    func indicatorImage() -> String {
+        switch self {
+            case .low: return "gauge.with.dots.needle.33percent"
+            case .medium: return "gauge.with.dots.needle.50percent"
+            case .high: return "gauge.with.dots.needle.67percent"
+        }
+    }
+    
 }
