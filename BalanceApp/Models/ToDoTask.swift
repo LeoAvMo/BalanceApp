@@ -46,4 +46,12 @@ enum Priority: String, Codable, CaseIterable, Identifiable {
         }
     }
     
+    func priorityColor() -> Color {
+        switch self {
+            case .low: return .green
+            case .medium: return .orange
+            case .high: return .red
+        }
+    }
+    
 }
