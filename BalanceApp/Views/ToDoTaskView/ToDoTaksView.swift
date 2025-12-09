@@ -19,7 +19,7 @@ struct ToDoTaksView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                if !tasks.isEmpty {
+                if tasks.isEmpty {
                     ContentUnavailableView("No Tasks", systemImage: "checkmark.seal.fill", description: Text("It looks like you have no tasks left to do. Add some tasks to get started!"))
                 } else {
                     MostImportantTaskView(topTask: topTask)
@@ -27,12 +27,11 @@ struct ToDoTaksView: View {
                 }
             }
             .task{
-                topTask = placeholderTask
+                topTask = tasks.first
             }
             .navigationTitle("Tasks")
             .sheet(isPresented: $showSheet) {
                 AddToDoTaskView()
-                    .presentationDetents([.medium])
             }
             .toolbar {
                 Menu ("Filter tasks", systemImage: "line.3.horizontal.decrease") {
