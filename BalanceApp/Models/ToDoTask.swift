@@ -23,8 +23,12 @@ final class ToDoTask {
     }
 }
 
-enum Priority {
-    case low, medium, high
+enum Priority: String, Codable, CaseIterable, Identifiable {
+    case low = "Low"
+    case medium = "Medium"
+    case high = "High"
+    
+    var id: Self { self }
     
     func toInt() -> Int {
         switch self {
