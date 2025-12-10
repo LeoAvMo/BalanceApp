@@ -20,13 +20,21 @@ struct ToDoTaksView: View {
         NavigationStack {
             ScrollView {
                 if tasks.isEmpty {
-                    ContentUnavailableView("No Tasks", systemImage: "checkmark.seal.fill", description: Text("It looks like you have no tasks left to do. Add some tasks to get started!"))
+                    NoTasksView()
+                        .padding()
                 } else {
                     MostImportantTaskView(topTask: topTask)
                     .padding()
+                    
+                    List {
+                        ForEach(tasks) { todoTask in
+                            Text(todoTask.name)
+                        }
+                    }
+                    .listStyle(.inset)
                 }
             }
-            .task{
+            .task {
                 topTask = tasks.first
             }
             .navigationTitle("Tasks")
@@ -61,6 +69,25 @@ struct ToDoTaksView: View {
     ToDoTaksView()
 }
 
+struct NoTasksView: View {
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 40)
+                .fill(.accent.opacity(0.1))
+            VStack {
+                Image("Lumi")
+                    .resizable()
+                    .scaledToFill()
+                    .padding(-30)
+                    .offset(y: 26)
+                    .frame(width: 50, height: 50)
+                    .padding(.top, 15)
+                ContentUnavailableView("No Tasks", systemImage: "", description: Text("It looks like you have no tasks left to do. Add some tasks to get started!"))
+            }
+            
+        }
+    }
+}
 struct MostImportantTaskView: View {
     var topTask: ToDoTask?
 
@@ -115,12 +142,8 @@ struct MostImportantTaskView: View {
                     .padding(.horizontal, 8)
                 }
                 .padding()
-            }
-            
+            }  
             .frame(maxWidth: .infinity)
-        
-                
-                
     }
 }
 

@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddToDoTaskView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
+    
     @State private var name: String = ""
     @State private var priority: Priority = .low
     @State private var dueDate: Date = Date()
@@ -31,7 +34,7 @@ struct AddToDoTaskView: View {
                 }
                 .pickerStyle(.automatic)
                 
-                DatePicker("Due Date", selection: $dueDate, displayedComponents: .date)
+                DatePicker("Due Date", selection: $dueDate, in: Date.now..., displayedComponents: .date)
                 VStack {
                     HStack {
                         Text("Duration")
@@ -74,15 +77,29 @@ struct AddToDoTaskView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Add Task", systemImage: "checkmark") {
+                        addToDoTask()
                         dismiss()
                     }
+                    .disabled(name.isEmpty || seconds == 0 && minutes == 0 && hours == 0)
                 }
-                
+
             }
+        }
+    }
+    
+    func addToDoTask() {
+        withAnimation {
+            timeToComplete = timeFormatter(hours: hours, minutes: minutes, seconds: seconds)
+            let newTodoTask = ToDoTask(name: name, priority: priority, dueDate: dueDate, timeToComplete: timeToComplete)
+            modelContext.insert(newTodoTask)
         }
     }
 }
 
 #Preview {
     AddToDoTaskView()
+}
+
+func timeFormatter(hours: Int, minutes: Int, seconds: Int) -> TimeInterval {
+    return TimeInterval(hours * 3600 + minutes * 60 + seconds)
 }
