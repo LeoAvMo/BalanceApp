@@ -10,10 +10,17 @@ import SwiftData
 
 struct ToDoTaksView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var tasks: [ToDoTask]
+    @Query(sort: \ToDoTask.orderIndex) private var tasks: [ToDoTask]
     
     @State private var filteredPriority: Priority? = nil
-    @State private var topTask: ToDoTask? = nil
+    
+    private var topTask: ToDoTask? {
+        if tasks.isEmpty {
+            return nil
+        } else {
+            return tasks.first
+        }
+    }
     @State private var showSheet: Bool = false
     
     var body: some View {
@@ -34,15 +41,6 @@ struct ToDoTaksView: View {
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                             Spacer()
-                            Button {
-                                
-                            } label: {
-                                HStack {
-                                    Image(systemName: "square.and.pencil")
-                                    Text("Edit")
-                                }
-                            }
-                            .buttonStyle(.glassProminent)
                         }
                         .listRowSeparator(.hidden)
                         
@@ -66,23 +64,23 @@ struct ToDoTaksView: View {
                                     .multilineTextAlignment(.leading)
                                     
                                     Spacer()
+                                    
                                     Button {
-                                        
+                                        // Delete task
+                                        // Add +1 to user defaults of completed tasks
                                     } label: {
                                         Image(systemName: "checkmark")
                                     }
-                                    .buttonStyle(.bordered)
+                                    .buttonStyle(.borderedProminent)
+                                    
                                 }
-                                
                             }
+                            .onMove(perform: moveTask)
                         }
                     }
                 }
             }
             .listStyle(.inset)
-            .task {
-                topTask = tasks.first
-            }
             .navigationTitle("Tasks")
             .sheet(isPresented: $showSheet) {
                 AddToDoTaskView()
@@ -107,6 +105,22 @@ struct ToDoTaksView: View {
                     showSheet.toggle()
                 }
             }
+        }
+    }
+    
+    private func deleteTodoTask(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(tasks[index])
+            }
+        }
+    }
+    
+    private func moveTask(from source: IndexSet, to destination: Int) {
+        var todoTasks = tasks
+        todoTasks.move(fromOffsets: source, toOffset: destination)
+        for (index, item) in todoTasks.enumerated() {
+            item.orderIndex = index
         }
     }
 }

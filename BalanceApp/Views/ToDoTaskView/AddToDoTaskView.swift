@@ -12,6 +12,8 @@ struct AddToDoTaskView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     
+    @Query private var tasks: [ToDoTask]
+    
     @State private var name: String = ""
     @State private var priority: Priority = .low
     @State private var dueDate: Date = Date()
@@ -82,7 +84,6 @@ struct AddToDoTaskView: View {
                     }
                     .disabled(name.isEmpty || seconds == 0 && minutes == 0 && hours == 0)
                 }
-
             }
         }
     }
@@ -90,7 +91,10 @@ struct AddToDoTaskView: View {
     func addToDoTask() {
         withAnimation {
             timeToComplete = timeFormatter(hours: hours, minutes: minutes, seconds: seconds)
-            let newTodoTask = ToDoTask(name: name, priority: priority, dueDate: dueDate, timeToComplete: timeToComplete)
+            
+            let highestIndex = tasks.map { $0.orderIndex }.max() ?? -1
+            let nextIndex = highestIndex + 1
+            let newTodoTask = ToDoTask(name: name, priority: priority, dueDate: dueDate, timeToComplete: timeToComplete, orderIndex: nextIndex)
             modelContext.insert(newTodoTask)
         }
     }

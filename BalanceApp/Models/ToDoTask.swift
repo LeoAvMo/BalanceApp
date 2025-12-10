@@ -14,12 +14,15 @@ final class ToDoTask {
     var priority: Priority
     var dueDate: Date
     var timeToComplete: TimeInterval
+    var orderIndex: Int
     
-    init(name: String = "", priority: Priority = .low, dueDate: Date = .now, timeToComplete: TimeInterval = 0.0) {
+    
+    init(name: String = "", priority: Priority = .low, dueDate: Date = .now, timeToComplete: TimeInterval = 0.0, orderIndex: Int = 0) {
         self.name = name
         self.priority = priority
         self.dueDate = dueDate
         self.timeToComplete = timeToComplete
+        self.orderIndex = orderIndex
     }
 }
 
