@@ -27,7 +27,6 @@ struct ToDoTaksView: View {
                         // Most important task modal
                         MostImportantTaskView(topTask: topTask)
                             .listRowSeparator(.hidden)
-                            .padding(.vertical)
                         
                         // List title and rearranging button
                         HStack {
@@ -50,10 +49,33 @@ struct ToDoTaksView: View {
                         // Actual List
                         Section {
                             ForEach(tasks) { todoTask in
-                                Text(todoTask.name)
+                                HStack {
+                                    Image(systemName: todoTask.priority.indicatorImage())
+                                        .foregroundStyle(todoTask.priority.priorityColor())
+                                        .font(.title)
+                                    VStack(alignment: .leading) {
+                                        Text(todoTask.name)
+                                            .font(.title)
+                                        Text("Due to: \(todoTask.dueDate.formatted(date: .numeric, time: .omitted))")
+                                            .foregroundStyle(.secondary)
+                                            .font(.caption)
+                                        Text("\(Duration.seconds(todoTask.timeToComplete).formatted())")
+                                            .font(.caption)
+                                            .foregroundStyle(.accent.opacity(0.8))
+                                    }
+                                    .multilineTextAlignment(.leading)
+                                    
+                                    Spacer()
+                                    Button {
+                                        
+                                    } label: {
+                                        Image(systemName: "checkmark")
+                                    }
+                                    .buttonStyle(.bordered)
+                                }
+                                
                             }
                         }
-                        
                     }
                 }
             }
