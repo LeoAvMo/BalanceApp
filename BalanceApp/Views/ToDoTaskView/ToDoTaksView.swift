@@ -67,6 +67,9 @@ struct ToDoTaksView: View {
                                     
                                     Button {
                                         // Delete task
+                                        withAnimation {
+                                            modelContext.delete(todoTask)
+                                        }
                                         // Add +1 to user defaults of completed tasks
                                     } label: {
                                         Image(systemName: "checkmark")
@@ -108,7 +111,7 @@ struct ToDoTaksView: View {
         }
     }
     
-    private func deleteTodoTask(offsets: IndexSet) {
+    private func deleteTask(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
                 modelContext.delete(tasks[index])
