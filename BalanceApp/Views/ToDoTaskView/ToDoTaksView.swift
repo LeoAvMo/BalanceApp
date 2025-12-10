@@ -18,22 +18,46 @@ struct ToDoTaksView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                if tasks.isEmpty {
-                    NoTasksView()
-                        .padding()
-                } else {
-                    MostImportantTaskView(topTask: topTask)
-                    .padding()
-                    
-                    List {
-                        ForEach(tasks) { todoTask in
-                            Text(todoTask.name)
+            List {
+                Section {
+                    if tasks.isEmpty {
+                        NoTasksView()
+                            .listRowSeparator(.hidden)
+                    } else {
+                        // Most important task modal
+                        MostImportantTaskView(topTask: topTask)
+                            .listRowSeparator(.hidden)
+                            .padding(.vertical)
+                        
+                        // List title and rearranging button
+                        HStack {
+                            Text("All tasks")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Button {
+                                
+                            } label: {
+                                HStack {
+                                    Image(systemName: "square.and.pencil")
+                                    Text("Edit")
+                                }
+                            }
+                            .buttonStyle(.glassProminent)
                         }
+                        .listRowSeparator(.hidden)
+                        
+                        // Actual List
+                        Section {
+                            ForEach(tasks) { todoTask in
+                                Text(todoTask.name)
+                            }
+                        }
+                        
                     }
-                    .listStyle(.inset)
                 }
             }
+            .listStyle(.inset)
             .task {
                 topTask = tasks.first
             }

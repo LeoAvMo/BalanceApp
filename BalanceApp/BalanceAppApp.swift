@@ -12,7 +12,7 @@ import SwiftData
 struct BalanceAppApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            ToDoTask.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,7 +25,7 @@ struct BalanceAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            BalanceTabView()
         }
         .modelContainer(sharedModelContainer)
     }
