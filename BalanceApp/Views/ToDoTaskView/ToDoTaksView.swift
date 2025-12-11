@@ -89,20 +89,28 @@ struct ToDoTaksView: View {
                 AddToDoTaskView()
             }
             .toolbar {
-                Menu ("Filter tasks", systemImage: "line.3.horizontal.decrease") {
-                    ForEach(Priority.allCases) { priority in
-                        Button(action: {
-                            filteredPriority = priority
-                        }) {
-                            HStack {
-                                Image(systemName: priority.indicatorImage())
-                                Text(priority.rawValue.capitalized)
-                            }
-                        }
+                Menu ("Sort by", systemImage: "arrow.up.arrow.down") {
+                    
+                    Button("Incoming date",
+                           systemImage: "calendar",
+                           action: sortByIncomingDate)
+                    
+                    Button("Least time",
+                           systemImage: "arrow.trianglehead.2.counterclockwise.rotate.90",
+                           action: sortByLeastTime)
+                    
+                    Button("Most time", systemImage: "arrow.trianglehead.2.clockwise.rotate.90"){
+                        
                     }
-                    Button("Clear Filter", systemImage: "xmark") {
-                        filteredPriority = nil
+                    
+                    Button("Least to most priority", systemImage: "chart.bar.xaxis.ascending"){
+                        
                     }
+                    
+                    Button("Most to least priority", systemImage: "chart.bar.xaxis.descending"){
+                        
+                    }
+                    
                 }
                 Button("Add Task", systemImage: "plus") {
                     showSheet.toggle()
@@ -126,6 +134,25 @@ struct ToDoTaksView: View {
             item.orderIndex = index
         }
     }
+    
+    func sortByIncomingDate() {
+        let sortedTasks: [ToDoTask] = tasks.sorted { $0.dueDate < $1.dueDate }
+        var counter = 0
+        for todoTask in sortedTasks {
+            todoTask.orderIndex = counter
+            counter += 1
+        }
+    }
+    
+    func sortByLeastTime() {
+        let sortedTasks: [ToDoTask] = tasks.sorted { $0.timeToComplete < $1.timeToComplete }
+        var counter = 0
+        for todoTask in sortedTasks {
+            todoTask.orderIndex = counter
+            counter += 1
+        }
+    }
+    
 }
 
 #Preview {
@@ -147,7 +174,6 @@ struct NoTasksView: View {
                     .padding(.top, 15)
                 ContentUnavailableView("No Tasks", systemImage: "", description: Text("It looks like you have no tasks left to do. Add some tasks to get started!"))
             }
-            
         }
     }
 }
@@ -209,5 +235,3 @@ struct MostImportantTaskView: View {
             .frame(maxWidth: .infinity)
     }
 }
-
-let placeholderTask = ToDoTask(name: "Finire il rapporto di biotecnologia", priority: .high, dueDate: Date(), timeToComplete: 1800)
