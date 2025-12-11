@@ -99,17 +99,17 @@ struct ToDoTaksView: View {
                            systemImage: "arrow.trianglehead.2.counterclockwise.rotate.90",
                            action: sortByLeastTime)
                     
-                    Button("Most time", systemImage: "arrow.trianglehead.2.clockwise.rotate.90"){
-                        
-                    }
+                    Button("Most time",
+                           systemImage: "arrow.trianglehead.2.clockwise.rotate.90",
+                           action: sortByMostTime)
                     
-                    Button("Least to most priority", systemImage: "chart.bar.xaxis.ascending"){
-                        
-                    }
+                    Button("Least to most priority",
+                           systemImage: "chart.bar.xaxis.ascending",
+                           action: sortByLeastPriority)
                     
-                    Button("Most to least priority", systemImage: "chart.bar.xaxis.descending"){
-                        
-                    }
+                    Button("Most to least priority",
+                           systemImage: "chart.bar.xaxis.descending",
+                           action: sortByHighestPriority)
                     
                 }
                 Button("Add Task", systemImage: "plus") {
@@ -146,6 +146,33 @@ struct ToDoTaksView: View {
     
     func sortByLeastTime() {
         let sortedTasks: [ToDoTask] = tasks.sorted { $0.timeToComplete < $1.timeToComplete }
+        var counter = 0
+        for todoTask in sortedTasks {
+            todoTask.orderIndex = counter
+            counter += 1
+        }
+    }
+    
+    func sortByMostTime() {
+        let sortedTasks: [ToDoTask] = tasks.sorted { $0.timeToComplete > $1.timeToComplete }
+        var counter = 0
+        for todoTask in sortedTasks {
+            todoTask.orderIndex = counter
+            counter += 1
+        }
+    }
+
+    func sortByLeastPriority() {
+        let sortedTasks: [ToDoTask] = tasks.sorted { $0.priority.toInt() < $1.priority.toInt() }
+        var counter = 0
+        for todoTask in sortedTasks {
+            todoTask.orderIndex = counter
+            counter += 1
+        }
+    }
+    
+    func sortByHighestPriority() {
+        let sortedTasks: [ToDoTask] = tasks.sorted { $0.priority.toInt() > $1.priority.toInt() }
         var counter = 0
         for todoTask in sortedTasks {
             todoTask.orderIndex = counter
