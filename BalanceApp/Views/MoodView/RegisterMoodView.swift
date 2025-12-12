@@ -10,6 +10,8 @@ import SwiftUI
 struct RegisterMoodView: View {
     @State private var selectedMood: MoodType? = nil
     private let rows = [GridItem(.flexible(minimum: 30, maximum: 30))]
+    
+    // TODO: insert into model context the current mood
     var body: some View {
         Group {
             VStack {
@@ -34,6 +36,7 @@ struct RegisterMoodView: View {
                                 }
                                 Text(moodType.rawValue)
                                     .foregroundStyle(selectedMood == moodType ? moodType.moodColor() : .gray)
+                                    .bold(selectedMood == moodType ? true : false)
                             }
                         }
                         .buttonStyle(.plain)

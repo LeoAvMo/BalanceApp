@@ -8,6 +8,7 @@
 import SwiftData
 import SwiftUI
 
+@Model
 final class Mood {
     var date: Date
     var moodType: MoodType

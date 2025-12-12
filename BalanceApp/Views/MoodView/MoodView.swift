@@ -6,12 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MoodView: View {
     @Environment(\.modelContext) private var modelContext
+    @Query private var moods: [Mood]
+    
+    var hasMoodForToday: Bool {
+        return moods.contains { mood in
+            Calendar.current.isDate(Date(), inSameDayAs: mood.date)
+        }
+    }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, World!")
+        
+        if hasMoodForToday {
+            
+        }
+        // if no mood registered today, display empty view and display fullscreen sheet
+        // else display rest of the view
     }
 }
 
