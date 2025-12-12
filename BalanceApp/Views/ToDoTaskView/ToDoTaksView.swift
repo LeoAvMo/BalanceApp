@@ -13,6 +13,7 @@ struct ToDoTaksView: View {
     @Query(sort: \ToDoTask.orderIndex) private var tasks: [ToDoTask]
     
     @State private var filteredPriority: Priority? = nil
+    @State private var selectedTask: ToDoTask? = nil
     
     private var topTask: ToDoTask? {
         if tasks.isEmpty {
@@ -47,35 +48,10 @@ struct ToDoTaksView: View {
                         // Actual List
                         Section {
                             ForEach(tasks) { todoTask in
-                                HStack {
-                                    Image(systemName: todoTask.priority.indicatorImage())
-                                        .foregroundStyle(todoTask.priority.priorityColor())
-                                        .font(.title)
-                                    VStack(alignment: .leading) {
-                                        Text(todoTask.name)
-                                            .font(.title)
-                                        Text("Due to: \(todoTask.dueDate.formatted(date: .numeric, time: .omitted))")
-                                            .foregroundStyle(.secondary)
-                                            .font(.caption)
-                                        Text("\(Duration.seconds(todoTask.timeToComplete).formatted())")
-                                            .font(.caption)
-                                            .foregroundStyle(.accent.opacity(0.8))
-                                    }
-                                    .multilineTextAlignment(.leading)
-                                    
-                                    Spacer()
-                                    
-                                    Button {
-                                        // Delete task
-                                        withAnimation {
-                                            modelContext.delete(todoTask)
-                                        }
-                                        // Add +1 to user defaults of completed tasks
-                                    } label: {
-                                        Image(systemName: "checkmark")
-                                    }
-                                    .buttonStyle(.borderedProminent)
-                                    
+                                Button {
+                                    selectedTask = todoTask
+                                } label: {
+                                    TaskEntryView(todoTask: todoTask)
                                 }
                             }
                             .onMove(perform: moveTask)
@@ -87,6 +63,9 @@ struct ToDoTaksView: View {
             .navigationTitle("Tasks")
             .sheet(isPresented: $showSheet) {
                 AddToDoTaskView()
+            }
+            .sheet(item: $selectedTask) { todoTask in
+                EditToDoTask(task: todoTask)
             }
             .toolbar {
                 Menu ("Sort by", systemImage: "arrow.up.arrow.down") {
@@ -115,14 +94,6 @@ struct ToDoTaksView: View {
                 Button("Add Task", systemImage: "plus") {
                     showSheet.toggle()
                 }
-            }
-        }
-    }
-    
-    private func deleteTask(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(tasks[index])
             }
         }
     }
@@ -204,6 +175,7 @@ struct NoTasksView: View {
         }
     }
 }
+
 struct MostImportantTaskView: View {
     var topTask: ToDoTask?
 
@@ -260,5 +232,42 @@ struct MostImportantTaskView: View {
                 .padding()
             }  
             .frame(maxWidth: .infinity)
+    }
+}
+
+struct TaskEntryView: View {
+    @Environment(\.modelContext) private var modelContext
+    var todoTask: ToDoTask
+    
+    var body: some View {
+        HStack {
+            Image(systemName: todoTask.priority.indicatorImage())
+                .foregroundStyle(todoTask.priority.priorityColor())
+                .font(.title)
+            VStack(alignment: .leading) {
+                Text(todoTask.name)
+                    .font(.title)
+                Text("Due to: \(todoTask.dueDate.formatted(date: .numeric, time: .omitted))")
+                    .foregroundStyle(.secondary)
+                    .font(.caption)
+                Text("\(Duration.seconds(todoTask.timeToComplete).formatted())")
+                    .font(.caption)
+                    .foregroundStyle(.accent.opacity(0.8))
+            }
+            .multilineTextAlignment(.leading)
+            
+            Spacer()
+            
+            Button {
+                // Delete task
+                withAnimation {
+                    modelContext.delete(todoTask)
+                }
+                // Add +1 to user defaults of completed tasks
+            } label: {
+                Image(systemName: "checkmark")
+            }
+            .buttonStyle(.borderedProminent)
+        }
     }
 }
