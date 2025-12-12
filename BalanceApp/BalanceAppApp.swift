@@ -12,7 +12,7 @@ import SwiftData
 struct BalanceAppApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            ToDoTask.self,
+            ToDoTask.self, Mood.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

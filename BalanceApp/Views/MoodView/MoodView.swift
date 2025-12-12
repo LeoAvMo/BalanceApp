@@ -19,11 +19,17 @@ struct MoodView: View {
     }
     
     var body: some View {
-        Text("Hello, World!")
+        NavigationStack {
+            ScrollView {
+                
+            }
+            .fullScreenCover(isPresented: .constant(!hasMoodForToday)) {
+                RegisterMoodView()
+            }
+            .navigationTitle("Mood")
         
-        if hasMoodForToday {
-            
         }
+        
         // if no mood registered today, display empty view and display fullscreen sheet
         // else display rest of the view
     }
@@ -31,4 +37,25 @@ struct MoodView: View {
 
 #Preview {
     MoodView()
+}
+
+struct NoMoodView: View {
+    var body: some View {
+        VStack(spacing: 12) {
+            Image("Lumi")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 140)
+                .padding(-30)
+            Text("No Mood Registered")
+                .font(.title2)
+                .fontWeight(.semibold)
+            Text("Start the day by adding a mood and discover the best way to achieve your tasks!")
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
 }

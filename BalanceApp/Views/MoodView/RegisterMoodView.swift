@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct RegisterMoodView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @State private var selectedMood: MoodType? = nil
     private let rows = [GridItem(.flexible(minimum: 30, maximum: 30))]
     
@@ -46,8 +49,10 @@ struct RegisterMoodView: View {
                 .frame(height: 105)
                 
                 Button("Register Mood", systemImage: "heart.fill"){
-                    
+                    modelContext.insert(Mood(date: Date(), moodType: selectedMood ?? .serious))
+                    dismiss()
                 }
+                .disabled(selectedMood == nil)
                 .buttonStyle(.glassProminent)
                 
             }
