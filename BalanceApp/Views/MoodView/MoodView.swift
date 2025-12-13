@@ -11,27 +11,39 @@ import SwiftData
 struct MoodView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var moods: [Mood]
+    @Query private var tasks: [ToDoTask]
     
-    var hasMoodForToday: Bool {
-        return moods.contains { mood in
-            Calendar.current.isDate(Date(), inSameDayAs: mood.date)
-        }
+    var todaysMood: Mood? {
+        return moods.first(where: { Calendar.current.isDate(Date(), inSameDayAs: $0.date) })
     }
-    
+
     var body: some View {
         NavigationStack {
             ScrollView {
+                MoodTypeResumeView(mood: todaysMood)
+                
+                HStack {
+                    Image("Lumi")
+                        .resizable()
+                        .scaledToFit()
+                        .padding(-20)
+                        .frame(width: 30, height: 30)
+                        .offset(x: -5)
+                    Text("Lumi Suggestions")
+                        .font(.headline)
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.top)
+                
                 
             }
-            .fullScreenCover(isPresented: .constant(!hasMoodForToday)) {
+            .padding(.horizontal)
+            .fullScreenCover(isPresented: .constant(!(todaysMood == nil))) {
                 RegisterMoodView()
             }
             .navigationTitle("Mood")
-        
         }
-        
-        // if no mood registered today, display empty view and display fullscreen sheet
-        // else display rest of the view
     }
 }
 
@@ -57,5 +69,32 @@ struct NoMoodView: View {
                 .padding(.horizontal)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+struct MoodTypeResumeView: View {
+    var mood: Mood?
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 40)
+                .fill(mood?.moodType.moodColor().opacity(0.2) ?? .gray.opacity(0.2))
+            HStack {
+                Text(mood?.moodType.moodEmoji() ?? "☁️")
+                    .font(.system(size: 45))
+                VStack (alignment: .leading, spacing: 5){
+                    Text(mood?.moodType.rawValue ?? "Looks a bit empty...")
+                        .font(Font.title.bold())
+                        .foregroundStyle(mood?.moodType.moodColor() ?? .primary)
+                    
+                    Text(mood?.moodType.moodDescription() ?? "Register a mood for today to begin with something awesome!")
+                        .font(.caption)
+                }
+                .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            .padding()
+        }
+        
     }
 }
