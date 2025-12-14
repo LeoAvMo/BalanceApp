@@ -39,7 +39,7 @@ struct MoodView: View {
                 
             }
             .padding(.horizontal)
-            .fullScreenCover(isPresented: .constant(!(todaysMood == nil))) {
+            .fullScreenCover(isPresented: .constant(todaysMood == nil)) {
                 RegisterMoodView()
             }
             .navigationTitle("Mood")

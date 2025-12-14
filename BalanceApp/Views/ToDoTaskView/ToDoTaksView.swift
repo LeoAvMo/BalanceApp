@@ -177,8 +177,9 @@ struct NoTasksView: View {
 }
 
 struct MostImportantTaskView: View {
+    @Environment(\.modelContext) private var modelContext
     var topTask: ToDoTask?
-
+    
         var body: some View {
             ZStack {
                 RoundedRectangle(cornerRadius: 40)
@@ -195,11 +196,15 @@ struct MostImportantTaskView: View {
                             .font(.subheadline)
                         Spacer()
                         Button {
-                            
+                            withAnimation {
+                                if let topTask = topTask {
+                                    modelContext.delete(topTask)
+                                }
+                            }
                         } label: {
                             HStack {
-                                Image(systemName: "clock.fill")
-                                Text("\(Duration.seconds(topTask?.timeToComplete ?? 0).formatted())")
+                                Image(systemName: "checkmark")
+                                Text("Mark as done")
                             }
                             .font(.caption)
                             .fontWeight(.semibold)
