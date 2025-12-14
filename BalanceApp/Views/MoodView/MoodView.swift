@@ -13,7 +13,7 @@ struct MoodView: View {
     @Query private var moods: [Mood]
     @Query private var tasks: [ToDoTask]
     
-    @State private var dailySuggestions: DailySuggestion?
+    @State private var generator = SuggestionGenerator()
     
     var todaysMood: Mood? {
         return moods.first(where: { Calendar.current.isDate(Date(), inSameDayAs: $0.date) })
@@ -38,9 +38,9 @@ struct MoodView: View {
                 .padding(.horizontal)
                 .padding(.top)
                 
-                if let dailySuggestions {
+                if let dailySuggestions = generator.dailySuggestion {
                     VStack(spacing: 12) {
-                        ForEach(dailySuggestions.suggestions, id: \.text) { suggestion in
+                        ForEach(dailySuggestions.suggestions ?? [], id: \.text) { suggestion in
                             SuggestionBlockView(suggestion: suggestion)
                         }
                     }
@@ -48,12 +48,25 @@ struct MoodView: View {
                     NoSuggestionsView()
                 }
             }
-            
             .padding(.horizontal)
-            .fullScreenCover(isPresented: .constant(!(todaysMood == nil))) {
+            .fullScreenCover(isPresented: .constant(todaysMood == nil)) {
                 RegisterMoodView()
             }
             .navigationTitle("Mood")
+            .task {
+                await checkAndGenerate()
+            }
+            .onChange(of: todaysMood) { _, newMood in
+                Task {
+                    await checkAndGenerate()
+                }
+            }
+        }
+    }
+    
+    private func checkAndGenerate() async {
+        if let mood = todaysMood, !tasks.isEmpty, generator.dailySuggestion == nil {
+            await generator.generate(mood: mood, tasks: tasks)
         }
     }
 }
@@ -111,15 +124,15 @@ struct MoodTypeResumeView: View {
 }
 
 struct SuggestionBlockView: View {
-    var suggestion: Suggestion
+    var suggestion: Suggestion.PartiallyGenerated
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 40)
                 .foregroundStyle(Color.accentColor.opacity(0.1))
             HStack {
-                Text(suggestion.emoji)
+                Text(suggestion.emoji ?? "⏳")
                     .font(.largeTitle)
-                Text(suggestion.text)
+                Text(suggestion.text ?? "Thinking")
                     .font(.caption)
                     .multilineTextAlignment(.leading)
                 Spacer()
@@ -145,7 +158,6 @@ struct NoSuggestionsView: View {
             }
             .padding()
         }
-        
     }
 }
 

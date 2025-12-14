@@ -1,0 +1,47 @@
+//
+//  SuggestionGenerator.swift
+//  BalanceApp
+//
+//  Created by Leo A.Molina on 14/12/25.
+//
+
+import Foundation
+import SwiftData
+import SwiftUI
+import FoundationModels
+
+@Observable
+class SuggestionGenerator {
+    var dailySuggestion: DailySuggestion.PartiallyGenerated?
+    var isGenerating: Bool = false
+    
+    func generate(mood: Mood, tasks: [ToDoTask]) async {
+        guard !tasks.isEmpty else { return }
+        self.isGenerating = true
+        
+        let instructions = """
+            Your job is to create a list of suggestions for the user to make their tasks easier based on their mood. The suggestions need to be short (150 character maximum) and simple. Use a friendly language, and validate the user's feelings.
+            """
+        let myPrompt = Prompt {
+            "Give 3 suggestions for the user to try based on their current mood. The user is in a \(mood.moodType.rawValue.lowercased()) right now."
+            
+            "The current user tasks in a level of how they prioritized them are: \n"
+            for task in tasks {
+                "- \(task.name)\n"
+            }
+            DailySuggestion.example
+        }
+        
+        do {
+            let session = LanguageModelSession(instructions: instructions)
+            for try await suggestion in try await session.streamResponse(to: myPrompt, generating: DailySuggestion.self) {
+                self.dailySuggestion = suggestion.content
+            }
+        } catch {
+            print("Error \(error)")
+        }
+        self.isGenerating = false
+    }
+    
+    
+}
