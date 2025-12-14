@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftData
 
+// TODO: Add alarms and notifications.
+
 struct AlarmView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \ToDoTask.orderIndex) private var tasks: [ToDoTask]

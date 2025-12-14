@@ -13,6 +13,8 @@ struct MoodView: View {
     @Query private var moods: [Mood]
     @Query private var tasks: [ToDoTask]
     
+    @State private var dailySuggestions: DailySuggestion?
+    
     var todaysMood: Mood? {
         return moods.first(where: { Calendar.current.isDate(Date(), inSameDayAs: $0.date) })
     }
@@ -36,10 +38,19 @@ struct MoodView: View {
                 .padding(.horizontal)
                 .padding(.top)
                 
-                
+                if let dailySuggestions {
+                    VStack(spacing: 12) {
+                        ForEach(dailySuggestions.suggestions, id: \.text) { suggestion in
+                            SuggestionBlockView(suggestion: suggestion)
+                        }
+                    }
+                } else {
+                    NoSuggestionsView()
+                }
             }
+            
             .padding(.horizontal)
-            .fullScreenCover(isPresented: .constant(todaysMood == nil)) {
+            .fullScreenCover(isPresented: .constant(!(todaysMood == nil))) {
                 RegisterMoodView()
             }
             .navigationTitle("Mood")
@@ -98,3 +109,43 @@ struct MoodTypeResumeView: View {
         
     }
 }
+
+struct SuggestionBlockView: View {
+    var suggestion: Suggestion
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 40)
+                .foregroundStyle(Color.accentColor.opacity(0.1))
+            HStack {
+                Text(suggestion.emoji)
+                    .font(.largeTitle)
+                Text(suggestion.text)
+                    .font(.caption)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            .padding()
+        }
+        
+    }
+}
+
+struct NoSuggestionsView: View {
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 40)
+                .foregroundStyle(Color.accentColor.opacity(0.1))
+            HStack {
+                Text("💡")
+                    .font(.largeTitle)
+                Text("You can start adding tasks so Lumi can make suggestions on what you can do to make them easier to tackle! Be sure that you entered your mood for today.")
+                    .font(.caption)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            .padding()
+        }
+        
+    }
+}
+
