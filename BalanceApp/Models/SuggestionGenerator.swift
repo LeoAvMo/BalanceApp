@@ -23,12 +23,13 @@ class SuggestionGenerator {
             Your job is to create a list of suggestions for the user to make their tasks easier based on their mood. The suggestions need to be short (150 character maximum) and simple. Use a friendly language, and validate the user's feelings. Make sure that the suggestions are related to the tasks, like a way to make the task easier.
             """
         let myPrompt = Prompt {
-            "Give 3 suggestions for the user to try based on their current mood. The user is in a \(mood.moodType.rawValue.lowercased()) right now."
+            "Give 5 suggestions for the user to try based on their current mood. The user is in a \(mood.moodType.rawValue.lowercased()) right now."
             
-            "The current user tasks in a level of how they prioritized them are: \n"
+            "The current user's tasks in a level of how they prioritized from most to least important are: \n"
             for task in tasks {
                 "- \(task.name)\n"
             }
+            "Take this priority into account when making the recommendations."
         }
         
         do {

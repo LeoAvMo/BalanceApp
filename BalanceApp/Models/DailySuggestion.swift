@@ -14,7 +14,7 @@ import SwiftUI
 struct DailySuggestion {
     
     @Guide(description: "A list of easy, friendly, and short daily suggestions for the user to try out to help them make their tasks a little easier, taking into account their current mood.")
-    @Guide(.count(3))
+    @Guide(.count(5))
     var suggestions: [Suggestion]
     
     init(suggestions: [Suggestion] = []) {

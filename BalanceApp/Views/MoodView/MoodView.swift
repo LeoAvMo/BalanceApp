@@ -41,6 +41,7 @@ struct MoodView: View {
                                 SuggestionBlockView(suggestion: suggestion)
                             }
                         }
+                        .animation(.easeOut, value: dailySuggestions.suggestions?.count ?? 0)
                     } else {
                         NoSuggestionsView()
                     }
@@ -128,11 +129,19 @@ struct SuggestionBlockView: View {
             RoundedRectangle(cornerRadius: 40)
                 .foregroundStyle(capsuleGradient.opacity(0.1))
             HStack {
-                Text(suggestion.emoji ?? "⏳")
-                    .font(.largeTitle)
-                Text(suggestion.text ?? "Thinking")
-                    .font(.caption)
-                    .multilineTextAlignment(.leading)
+                if let emoji = suggestion.emoji {
+                    Text(emoji)
+                        .font(.largeTitle)
+                        .contentTransition(.opacity)
+                }
+                
+                if let text = suggestion.text {
+                    Text(text)
+                        .font(.caption)
+                        .multilineTextAlignment(.leading)
+                        .contentTransition(.opacity)
+                }
+                
                 Spacer()
             }
             .padding()
