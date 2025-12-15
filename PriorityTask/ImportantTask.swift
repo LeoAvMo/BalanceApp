@@ -5,6 +5,7 @@
 //  Created by Leo A.Molina on 03/12/25.
 //
 
+/*
 import WidgetKit
 import SwiftUI
 
@@ -112,3 +113,4 @@ extension ConfigurationAppIntent {
     ImportantTask(date: Date(), name: "Finire il rapporto", difficulty: 1, timeDuration: 10, configuration: .smiley)
     ImportantTask(date: Date(), name: "Finire il rapporto", difficulty: 1, timeDuration: 10, configuration: .starEyes)
 }
+*/

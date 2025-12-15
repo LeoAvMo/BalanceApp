@@ -4,7 +4,7 @@
 //
 //  Created by Leo A.Molina on 03/12/25.
 //
-
+/*
 import WidgetKit
 import SwiftUI
 
@@ -86,3 +86,4 @@ extension ConfigurationAppIntent {
     SimpleEntry(date: .now, configuration: .smiley)
     SimpleEntry(date: .now, configuration: .starEyes)
 }
+*/

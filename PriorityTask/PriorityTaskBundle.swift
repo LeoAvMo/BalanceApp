@@ -11,8 +11,9 @@ import SwiftUI
 @main
 struct PriorityTaskBundle: WidgetBundle {
     var body: some Widget {
-        PriorityTask()
-        ImportantTaskWidget()
-        PriorityTaskLiveActivity()
+        //PriorityTask()
+        //ImportantTaskWidget()
+        //PriorityTaskLiveActivity()
+        AlarmLiveActivity()
     }
 }

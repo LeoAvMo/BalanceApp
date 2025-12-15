@@ -4,7 +4,7 @@
 //
 //  Created by Leo A.Molina on 03/12/25.
 //
-
+/*
 import ActivityKit
 import WidgetKit
 import SwiftUI
@@ -78,3 +78,4 @@ extension PriorityTaskAttributes.ContentState {
     PriorityTaskAttributes.ContentState.smiley
     PriorityTaskAttributes.ContentState.starEyes
 }
+*/
