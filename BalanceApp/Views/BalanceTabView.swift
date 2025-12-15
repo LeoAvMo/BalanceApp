@@ -14,13 +14,14 @@ struct BalanceTabView: View {
                 ToDoTaksView()
             }
             
-            Tab("Mood", systemImage: "figure.mind.and.body") {
-                MoodView()
-            }
-            
             Tab("Timer", systemImage: "alarm.fill") {
                 AlarmView()
             }
+            
+            Tab("Mood", systemImage: "figure.mind.and.body") {
+                MoodView()
+            }       
+            
         }
     }
 }

@@ -10,6 +10,7 @@ import SwiftData
 
 // TODO: Add alarms and notifications.
 // TODO: Make distinction between cancel and pause for timer.
+// TODO: Set hours, minutes and seconds to 0 once the timer is cancelled
 
 struct AlarmView: View {
     @Environment(\.modelContext) private var modelContext

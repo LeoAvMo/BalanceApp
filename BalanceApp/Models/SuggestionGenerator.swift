@@ -29,7 +29,6 @@ class SuggestionGenerator {
             for task in tasks {
                 "- \(task.name)\n"
             }
-            DailySuggestion.example
         }
         
         do {

@@ -8,7 +8,9 @@
 import SwiftUI
 import SwiftData
 
-// TODO:  Add cases for not enabled Apple Intelligence
+// TODO: Add cases for not enabled Apple Intelligence
+// TODO: Add animation for generable Apple Intelligence content
+// TODO: Add notification for Apple Intelligence usage
 
 struct MoodView: View {
     @Environment(\.modelContext) private var modelContext
