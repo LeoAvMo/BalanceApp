@@ -22,34 +22,29 @@ struct MoodView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                MoodTypeResumeView(mood: todaysMood)
-                
-                HStack {
-                    Image("Lumi")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(-20)
-                        .frame(width: 30, height: 30)
-                        .offset(x: -5)
-                    Text("Lumi Suggestions")
-                        .font(.headline)
-                    Spacer()
+                LazyVStack {
+                    MoodTypeResumeView(mood: todaysMood)
+                    
+                    MoodHistoryComponent(moods: moods)
+                        .padding(.top)
+                    
+                    LumiSubtitleView(text: "Lumi suggestions")
+                    .padding(.horizontal)
+                    .padding(.top)
+                    
+                    if let dailySuggestions = generator.dailySuggestion {
+                        VStack(spacing: 12) {
+                            ForEach(dailySuggestions.suggestions ?? [], id: \.text) { suggestion in
+                                SuggestionBlockView(suggestion: suggestion)
+                            }
+                        }
+                    } else {
+                        NoSuggestionsView()
+                    }
                 }
                 .padding(.horizontal)
-                .padding(.top)
-                
-                if let dailySuggestions = generator.dailySuggestion {
-                    VStack(spacing: 12) {
-                        ForEach(dailySuggestions.suggestions ?? [], id: \.text) { suggestion in
-                            SuggestionBlockView(suggestion: suggestion)
-                        }
-                    }
-                } else {
-                    NoSuggestionsView()
-                }
             }
-            .padding(.horizontal)
-            .fullScreenCover(isPresented: .constant(todaysMood == nil)) {
+            .fullScreenCover(isPresented: .constant((todaysMood == nil))) {
                 RegisterMoodView()
             }
             .navigationTitle("Mood")
@@ -128,7 +123,7 @@ struct SuggestionBlockView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 40)
-                .foregroundStyle(Color.accentColor.opacity(0.1))
+                .foregroundStyle(capsuleGradient.opacity(0.1))
             HStack {
                 Text(suggestion.emoji ?? "⏳")
                     .font(.largeTitle)
@@ -144,10 +139,11 @@ struct SuggestionBlockView: View {
 }
 
 struct NoSuggestionsView: View {
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 40)
-                .foregroundStyle(Color.accentColor.opacity(0.1))
+                .foregroundStyle(capsuleGradient.opacity(0.1))
             HStack {
                 Text("💡")
                     .font(.largeTitle)
@@ -161,3 +157,79 @@ struct NoSuggestionsView: View {
     }
 }
 
+struct MoodHistoryComponent: View {
+    var moods: [Mood]
+    
+    private var last7Days: [Date] {
+        let calendar = Calendar.current
+        let today = Date()
+        return (0..<7).map { i in
+            calendar.date(byAdding: .day, value: -i, to: today)!
+        }.reversed()
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Last 7 Days")
+                .font(.headline)
+                .padding(.horizontal)
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 40)
+                    .foregroundStyle(Color.accentColor.opacity(0.1))
+                
+                HStack(spacing: 0) {
+                    ForEach(last7Days, id: \.self) { date in
+                        MoodDayItem(date: date, moods: moods)
+                    }
+                }
+                .padding(.vertical, 15)
+                .padding(.horizontal, 5)
+            }
+        }
+    }
+}
+
+struct MoodDayItem: View {
+    let date: Date
+    let moods: [Mood]
+    
+    private var moodForDay: Mood? {
+        moods.first { Calendar.current.isDate($0.date, inSameDayAs: date) }
+    }
+    
+    var body: some View {
+        VStack(spacing: 6) {
+            
+            Text(moodForDay?.moodType.moodEmoji() ?? "☁️")
+                .font(.title2)
+                .shadow(
+                    color: moodForDay?.moodType.moodColor() ?? .clear,
+                    radius: moodForDay != nil ? 5 : 0
+                )
+            
+            Text(date, format: .dateTime.day())
+                .font(.caption2)
+                .fontWeight(.bold)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity) // Ensures they are spaced equally
+    }
+}
+
+struct LumiSubtitleView: View {
+    var text: String
+    var body: some View {
+        HStack {
+            Image("Lumi")
+                .resizable()
+                .scaledToFit()
+                .padding(-20)
+                .frame(width: 30, height: 30)
+                .offset(x: -5)
+            Text(text)
+                .font(.headline)
+            Spacer()
+        }
+    }
+}
