@@ -7,10 +7,9 @@
 
 import SwiftUI
 import SwiftData
+import FoundationModels
 
-// TODO: Add cases for not enabled Apple Intelligence
 // TODO: Add animation for generable Apple Intelligence content
-// TODO: Add notification for Apple Intelligence usage
 
 struct MoodView: View {
     @Environment(\.modelContext) private var modelContext
@@ -143,15 +142,54 @@ struct SuggestionBlockView: View {
 }
 
 struct NoSuggestionsView: View {
+    let model = SystemLanguageModel.default
+    var emoji: String {
+        switch model.availability {
+            case .available:
+                return "💡"
+                
+            case .unavailable(.deviceNotEligible):
+                return "📱"
+                
+            case .unavailable(.appleIntelligenceNotEnabled):
+                return "🛠️"
+            
+            case .unavailable(.modelNotReady):
+                return "💭"
+                
+            case .unavailable(_):
+                return "⏳"
+        }
+    }
+    
+    var text: String  {
+        switch model.availability {
+            case .available:
+                return "You can start adding tasks so Lumi can make suggestions on what you can do to make them easier to tackle! Be sure that you entered your mood for today."
+                
+            case .unavailable(.deviceNotEligible):
+                return "It seems like your device is not eligible for this feature 😢"
+                
+            case .unavailable(.appleIntelligenceNotEnabled):
+                return "It looks like Apple Intelligence is not enabled in your device. You can Apple Intelligence for this app in Settings for Lumi to generate suggestions for you!"
+            
+            case .unavailable(.modelNotReady):
+                return "Looks like Apple Intelligence is still loading. Please try again in a few minutes."
+                
+            case .unavailable(_):
+                return "There seems to be an error. Please try again later."
+        }
+    }
     
     var body: some View {
+        
         ZStack {
             RoundedRectangle(cornerRadius: 40)
                 .foregroundStyle(capsuleGradient.opacity(0.1))
             HStack {
-                Text("💡")
+                Text(emoji)
                     .font(.largeTitle)
-                Text("You can start adding tasks so Lumi can make suggestions on what you can do to make them easier to tackle! Be sure that you entered your mood for today.")
+                Text(text)
                     .font(.caption)
                     .multilineTextAlignment(.leading)
                 Spacer()

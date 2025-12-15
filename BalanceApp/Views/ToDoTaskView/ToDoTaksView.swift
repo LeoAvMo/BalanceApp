@@ -251,7 +251,8 @@ struct TaskEntryView: View {
                 .font(.title)
             VStack(alignment: .leading) {
                 Text(todoTask.name)
-                    .font(.title)
+                    .font(.title3)
+                    .bold()
                 Text("Due to: \(todoTask.dueDate.formatted(date: .numeric, time: .omitted))")
                     .foregroundStyle(.secondary)
                     .font(.caption)

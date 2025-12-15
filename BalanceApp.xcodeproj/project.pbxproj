@@ -44,6 +44,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		791D24E12EF01BAF00ABD28C /* Exceptions for "BalanceApp" folder in "BalanceApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 79B1F6CF2EE03FC10073C3C1 /* BalanceApp */;
+		};
 		79B1F6FB2EE0424E0073C3C1 /* Exceptions for "PriorityTask" folder in "PriorityTaskExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -56,6 +63,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		79B1F6D22EE03FC10073C3C1 /* BalanceApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				791D24E12EF01BAF00ABD28C /* Exceptions for "BalanceApp" folder in "BalanceApp" target */,
+			);
 			path = BalanceApp;
 			sourceTree = "<group>";
 		};
@@ -380,6 +390,7 @@
 				DEVELOPMENT_TEAM = X6QP58933C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BalanceApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Lock In";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -414,6 +425,7 @@
 				DEVELOPMENT_TEAM = X6QP58933C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BalanceApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Lock In";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

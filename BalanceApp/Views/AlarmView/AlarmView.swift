@@ -9,8 +9,7 @@ import SwiftUI
 import SwiftData
 
 // TODO: Add alarms and notifications.
-// TODO: Make distinction between cancel and pause for timer.
-// TODO: Set hours, minutes and seconds to 0 once the timer is cancelled
+// TODO: make it expandable
 
 struct AlarmView: View {
     @Environment(\.modelContext) private var modelContext
@@ -92,7 +91,7 @@ struct ToDoTaskTimerView: View {
                     
                     if timer != nil {
                         Button {
-                            
+                            toggleTimer()
                         } label: {
                             Image(systemName: "xmark")
                         }
@@ -101,13 +100,18 @@ struct ToDoTaskTimerView: View {
                     
                     
                     Button {
-                        toggleTimer()
+                        if timer?.isValid == true {
+                            pauseTimer()
+                        } else {
+                            startTimer()
+                        }
                     } label: {
                         HStack {
                             if timer == nil {
                                 Text("Start")
                             }
-                            Image(systemName: timer == nil ? "play.fill" : "pause.fill")
+                            // TODO: See why icon is not changing.
+                            Image(systemName: timer == nil ? "play.fill" : timer?.isValid == true ? "pause.fill" : "play.fill")
                         }
                     }
                     .buttonStyle(.glassProminent)
@@ -155,9 +159,9 @@ struct ToDoTaskTimerView: View {
             }
             .padding()
         }
-        .onDisappear {
-            stopTimer()
-        }
+//        .onDisappear {
+//            stopTimer()
+//        }
         .onChange(of: todoTask) { _, newTask in
             if let task = newTask {
                 
@@ -207,10 +211,17 @@ struct ToDoTaskTimerView: View {
         }
     }
     
+    func pauseTimer() {
+        timer?.invalidate()
+    }
+    
     func stopTimer() {
         timer?.invalidate()
         timer = nil
         todoTask = nil
+        hours = 0
+        minutes = 0
+        seconds = 0
     }
 }
 
@@ -231,7 +242,8 @@ struct TaskTimerEntryView: View {
                 .font(.title)
             VStack(alignment: .leading) {
                 Text(todoTask.name)
-                    .font(.title)
+                    .font(.title3)
+                    .bold()
                 Text("Due to: \(todoTask.dueDate.formatted(date: .numeric, time: .omitted))")
                     .foregroundStyle(.secondary)
                     .font(.caption)
@@ -245,7 +257,7 @@ struct TaskTimerEntryView: View {
                 onStart(todoTask)
             } label: {
                 HStack {
-                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                    Image(systemName: isPlaying ? "xmark" : "play.fill")
                     Text("\(Duration.seconds(todoTask.timeToComplete).formatted())")
                 }
             }
