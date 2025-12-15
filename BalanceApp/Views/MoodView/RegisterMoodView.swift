@@ -14,7 +14,6 @@ struct RegisterMoodView: View {
     @State private var selectedMood: MoodType? = nil
     private let rows = [GridItem(.flexible(minimum: 30, maximum: 30))]
     
-    // TODO: insert into model context the current mood
     var body: some View {
         Group {
             VStack {

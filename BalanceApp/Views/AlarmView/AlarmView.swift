@@ -67,6 +67,7 @@ struct ToDoTaskTimerView: View {
     @State private var hours: Int = 0
     @State private var minutes: Int = 0
     @State private var seconds: Int = 0
+    @State private var isTimerRunning: Bool = false
     
     @Binding var todoTask: ToDoTask?
     @Binding var timer: Timer?
@@ -111,7 +112,7 @@ struct ToDoTaskTimerView: View {
                                 Text("Start")
                             }
                             // TODO: See why icon is not changing.
-                            Image(systemName: timer == nil ? "play.fill" : timer?.isValid == true ? "pause.fill" : "play.fill")
+                            Image(systemName: isTimerRunning ? "pause.fill" : "play.fill")
                         }
                     }
                     .buttonStyle(.glassProminent)
@@ -159,9 +160,12 @@ struct ToDoTaskTimerView: View {
             }
             .padding()
         }
-//        .onDisappear {
-//            stopTimer()
-//        }
+        .onAppear {
+            isTimerRunning = timer?.isValid ?? false
+        }
+        .onChange(of: timer) { _, newTimer in
+            isTimerRunning = newTimer?.isValid ?? false
+        }
         .onChange(of: todoTask) { _, newTask in
             if let task = newTask {
                 
@@ -192,6 +196,8 @@ struct ToDoTaskTimerView: View {
         
         timer?.invalidate()
         
+        isTimerRunning = true
+        
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             let currentSeconds = hours * 3600 + minutes * 60 + seconds
             
@@ -213,6 +219,7 @@ struct ToDoTaskTimerView: View {
     
     func pauseTimer() {
         timer?.invalidate()
+        isTimerRunning = false
     }
     
     func stopTimer() {
@@ -222,6 +229,7 @@ struct ToDoTaskTimerView: View {
         hours = 0
         minutes = 0
         seconds = 0
+        isTimerRunning = false
     }
 }
 
