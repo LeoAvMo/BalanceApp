@@ -19,7 +19,7 @@ struct AddToDoTaskView: View {
     @State private var dueDate: Date = Date()
     @State private var timeToComplete: TimeInterval = 0
     @State private var seconds: Int = 0
-    @State private var minutes: Int = 30
+    @State private var minutes: Int = 0
     @State private var hours: Int = 0
     var body: some View {
         NavigationStack {

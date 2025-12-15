@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 // TODO: Add alarms and notifications.
+// TODO: Make distinction between cancel and pause for timer.
 
 struct AlarmView: View {
     @Environment(\.modelContext) private var modelContext
@@ -88,15 +89,28 @@ struct ToDoTaskTimerView: View {
                         .fontWeight(.semibold)
                     Spacer()
                     
+                    if timer != nil {
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
+                        .buttonStyle(.glassProminent)
+                    }
+                    
+                    
                     Button {
                         toggleTimer()
                     } label: {
                         HStack {
+                            if timer == nil {
+                                Text("Start")
+                            }
                             Image(systemName: timer == nil ? "play.fill" : "pause.fill")
-                            Text(timer == nil ? "Start": "Stop")
                         }
                     }
                     .buttonStyle(.glassProminent)
+                    
                 }
                 
                 if timer != nil {
@@ -109,6 +123,7 @@ struct ToDoTaskTimerView: View {
                             .contentTransition(.numericText())
                         Spacer()
                     }
+                    .padding()
                 } else {
                     HStack {
                         Picker("Hours", selection: $hours) {
@@ -236,5 +251,6 @@ struct TaskTimerEntryView: View {
             .buttonStyle(.borderedProminent)
         }
         .buttonStyle(.plain)
+        .listRowBackground(isPlaying ? Color.accentColor.opacity(0.1) : Color.clear)
     }
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftData
 
+// TODO:  Add cases for not enabled Apple Intelligence
+
 struct MoodView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var moods: [Mood]
