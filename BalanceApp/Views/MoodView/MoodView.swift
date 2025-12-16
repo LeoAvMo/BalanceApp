@@ -100,7 +100,7 @@ struct MoodTypeResumeView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 40)
+            RoundedRectangle(cornerRadius: generalCornerRadius)
                 .fill(mood?.moodType.moodColor().opacity(0.2) ?? .gray.opacity(0.2))
             HStack {
                 Text(mood?.moodType.moodEmoji() ?? "☁️")
@@ -126,7 +126,7 @@ struct SuggestionBlockView: View {
     var suggestion: Suggestion.PartiallyGenerated
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 40)
+            RoundedRectangle(cornerRadius: generalCornerRadius)
                 .foregroundStyle(capsuleGradient.opacity(0.1))
             HStack {
                 if let emoji = suggestion.emoji {
@@ -193,7 +193,7 @@ struct NoSuggestionsView: View {
     var body: some View {
         
         ZStack {
-            RoundedRectangle(cornerRadius: 40)
+            RoundedRectangle(cornerRadius: generalCornerRadius)
                 .foregroundStyle(capsuleGradient.opacity(0.1))
             HStack {
                 Text(emoji)

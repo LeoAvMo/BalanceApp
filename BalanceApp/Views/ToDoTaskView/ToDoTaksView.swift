@@ -164,7 +164,7 @@ struct ToDoTaksView: View {
 struct NoTasksView: View {
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 40)
+            RoundedRectangle(cornerRadius: generalCornerRadius)
                 .fill(.accent.opacity(0.1))
             VStack {
                 Image("Lumi")
@@ -186,7 +186,7 @@ struct MostImportantTaskView: View {
     
         var body: some View {
             ZStack {
-                RoundedRectangle(cornerRadius: 40)
+                RoundedRectangle(cornerRadius: generalCornerRadius)
                     .fill(.accent.opacity(0.1))
                 VStack (spacing: 10){
                     HStack {
