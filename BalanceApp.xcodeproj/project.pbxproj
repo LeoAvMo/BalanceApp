@@ -551,7 +551,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BalanceApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Lock In";
+				INFOPLIST_KEY_CFBundleDisplayName = "Lum-In";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -586,7 +586,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BalanceApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Lock In";
+				INFOPLIST_KEY_CFBundleDisplayName = "Lum-In";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -620,7 +620,7 @@
 				DEVELOPMENT_TEAM = X6QP58933C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PriorityTask/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PriorityTask;
+				INFOPLIST_KEY_CFBundleDisplayName = "Lum-In Widgets";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -650,7 +650,7 @@
 				DEVELOPMENT_TEAM = X6QP58933C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PriorityTask/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PriorityTask;
+				INFOPLIST_KEY_CFBundleDisplayName = "Lum-In Widgets";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
