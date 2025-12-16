@@ -64,6 +64,7 @@ struct EditToDoTask: View {
                         }
                         .pickerStyle(.wheel)
                     }
+                    .frame(height: 100)
                 }
             }
             .onAppear {

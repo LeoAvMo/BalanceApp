@@ -171,9 +171,9 @@ struct AlarmControls: View {
         HStack(spacing: 4) {
             switch state.mode {
             case .countdown:
-                    ButtonView(config: presentation.countdown?.pauseButton, intent: PauseIntent(alarmID: state.alarmID.uuidString), tint: .purple)
+                    ButtonView(config: presentation.countdown?.pauseButton, intent: PauseIntent(alarmID: state.alarmID.uuidString), tint: .accentColor)
             case .paused:
-                    ButtonView(config: presentation.paused?.resumeButton, intent: ResumeIntent(alarmID: state.alarmID.uuidString), tint: .purple)
+                    ButtonView(config: presentation.paused?.resumeButton, intent: ResumeIntent(alarmID: state.alarmID.uuidString), tint: .accentColor)
             default:
                 EmptyView()
             }

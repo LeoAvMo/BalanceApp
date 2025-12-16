@@ -63,9 +63,13 @@ struct ToDoTaksView: View {
             .navigationTitle("Tasks")
             .sheet(isPresented: $showSheet) {
                 AddToDoTaskView()
+                    .presentationDetents([.medium])
+
             }
+            
             .sheet(item: $selectedTask) { todoTask in
                 EditToDoTask(task: todoTask)
+                    .presentationDetents([.medium])
             }
             .toolbar {
                 Menu ("Sort by", systemImage: "arrow.up.arrow.down") {

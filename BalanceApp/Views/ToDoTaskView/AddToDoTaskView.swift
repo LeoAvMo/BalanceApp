@@ -66,6 +66,7 @@ struct AddToDoTaskView: View {
                         }
                         .pickerStyle(.wheel)
                     }
+                    .frame(height: 100)
                 }
             }
             .navigationTitle("Add Task")
